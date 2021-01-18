@@ -1,0 +1,30 @@
+    public static boolean isValid(String s) {
+        //'(', ')', '{', '}', '[' and ']'
+        List<Character> openBrackets = new ArrayList<>();
+        openBrackets.add('(');
+        openBrackets.add('{');
+        openBrackets.add('[');
+
+        List<Character> closeBrackets = new ArrayList<>();
+        closeBrackets.add(')');
+        closeBrackets.add('}');
+        closeBrackets.add(']');
+
+        Stack stack = new Stack();
+        for (int i = 0; i < s.length(); i++) {
+            char element = s.charAt(i);
+            if (openBrackets.contains(element)){
+                stack.push(element);
+            }
+            else if (!stack.isEmpty() && closeBrackets.contains(element)){
+                char statckOpen = (char) stack.pop();
+                int index = closeBrackets.indexOf(element);
+                char open = openBrackets.get(index);
+                if (open == statckOpen) continue;
+                else return false;
+            }
+            else if (i == 0) return false;
+        }
+        if (stack.empty()) return true;
+        else return false;
+    }
