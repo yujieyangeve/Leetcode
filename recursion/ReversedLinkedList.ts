@@ -1,19 +1,22 @@
-//Definition for singly-linked list.
-class ListNode {
-  val: number;
-  next: ListNode | null;
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-}
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+         if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
 
-function reverseList(head: ListNode | null): ListNode | null {
-  if (head === null) return head;
-  if (head.next === null) return head;
-  const tmp: ListNode = reverseList(head.next);
-  tmp.next = head;
-  head.next.next = head;
-  head.next = null;
-  return tmp;
+    }
 }
